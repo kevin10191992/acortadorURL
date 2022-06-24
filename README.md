@@ -3,6 +3,8 @@
 Ejemplo uso:
 http://localhost:3000/api/{slug}
 
+si recibe el header response-json con valor true no redirecciona sino que devuelve lo que se encuentra en la base de datos.
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
