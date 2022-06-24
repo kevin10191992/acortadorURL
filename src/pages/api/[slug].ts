@@ -6,6 +6,10 @@ const prisma = new PrismaClient();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const slug = req.query["slug"];
+    const ResponseJson = req.headers["response-json"];
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Content-Type", "application/json");
 
     if (!slug || typeof slug !== "string") {
         res.statusCode = 404;
@@ -13,7 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             Codigo: "02",
             Descripcion: "Parametro invalido"
         };
-        res.send(JSON.stringify(resp));
+        res.json(resp);
         return;
     }
 
@@ -26,17 +30,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     if (!data) {
+        res.setHeader("Cache-Control", "s-maxage=10000000000000, stale-while-revalidate=59")
         res.statusCode = 404;
         let resp: GenericResponseModel = {
             Codigo: "02",
             Descripcion: "Slug No encontrado"
         };
-        res.send(JSON.stringify(resp));
+        res.json(resp);
         return;
     }
 
-    return res.redirect(data.url != null ? data.url : "");
-
+    if (!ResponseJson) {
+        return res.redirect(data.url != null ? data.url : "");
+    } else {
+        return res.json(data);
+    }
 
 
 
