@@ -4,7 +4,7 @@ import GenericResponseModel from "../../models/GenericResponseModel";
 
 const prisma = new PrismaClient();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const slug = async (req: NextApiRequest, res: NextApiResponse) => {
     const slug = req.query["slug"];
     const ResponseJson = req.headers["response-json"];
 
@@ -49,3 +49,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
 }
+
+export default slug;

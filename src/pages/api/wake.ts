@@ -4,7 +4,7 @@ import GenericResponseModel from "../../models/GenericResponseModel";
 
 const prisma = new PrismaClient();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const wake = async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
 
@@ -25,3 +25,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
 }
+export default wake;
